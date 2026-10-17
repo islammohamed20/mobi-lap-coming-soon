@@ -135,7 +135,7 @@
 :root {
   --cs-bg: oklch(0 0 0);
   --cs-fg: oklch(1 0 0);
-  --cs-dim: oklch(0.62 0 0);
+  --cs-dim: oklch(0.72 0 0);
   --cs-line: oklch(1 0 0 / 14%);
   --cs-accent: oklch(1 0 0);
 }

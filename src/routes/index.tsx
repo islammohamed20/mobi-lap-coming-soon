@@ -86,21 +86,24 @@ function Index() {
       <div className="cs-noise pointer-events-none absolute inset-0" />
 
       <header className="relative z-10 flex items-center justify-between px-6 py-6 md:px-12">
-        <img src={logo.url} alt="mobiLap" className="cs-logo h-8 w-auto md:h-10" />
+        <a href="https://mobilestore.com" className="cs-display text-xs uppercase tracking-[0.3em] md:text-sm">
+          mobilestore.com
+        </a>
         <span className="cs-glass cs-dim flex items-center gap-2 rounded-full px-4 py-2 text-[11px] uppercase tracking-[0.3em]">
           <span className="cs-dot h-1.5 w-1.5 animate-pulse rounded-full" /> In progress
         </span>
       </header>
 
       <section className="relative z-10 flex flex-1 flex-col items-center justify-center px-6 py-16 text-center">
-        <p className="cs-fade cs-accent mb-6 text-xs font-semibold uppercase tracking-[0.5em]">
-          mobiLap Store
-        </p>
-        <h1 className="cs-fade cs-d1 cs-display cs-gradient-text text-6xl font-extrabold leading-[0.9] tracking-tight md:text-[9rem]">
-          Coming
-          <br />
-          Soon.
+        <img
+          src={logo.url}
+          alt="mobiLap Store"
+          className="cs-fade cs-logo w-[min(80vw,580px)]"
+        />
+        <h1 className="cs-fade cs-d1 cs-display cs-gradient-text mt-7 text-5xl font-extrabold leading-[0.95] tracking-tight md:text-8xl">
+          Coming Soon.
         </h1>
+
         <p className="cs-fade cs-d2 cs-dim mt-8 max-w-lg text-base md:text-lg">
           The latest smartphones, laptops and accessories — curated, genuine and delivered fast.
           Something great is on its way.
