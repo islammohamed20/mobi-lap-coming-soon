@@ -16,7 +16,7 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const LAUNCH = new Date("2026-12-01T00:00:00Z").getTime();
+const LAUNCH = new Date("2026-11-01T12:00:00Z").getTime();
 
 const TICKER = [
   "Smartphones",
