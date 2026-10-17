@@ -18,6 +18,17 @@ export const Route = createFileRoute("/")({
 
 const LAUNCH = new Date("2026-12-01T00:00:00Z").getTime();
 
+const TICKER = [
+  "Smartphones",
+  "Laptops",
+  "Tablets",
+  "Audio",
+  "Wearables",
+  "Accessories",
+  "Gaming",
+  "Smart Home",
+];
+
 function useCountdown() {
   const [now, setNow] = useState<number | null>(null);
   useEffect(() => {
@@ -34,6 +45,30 @@ function useCountdown() {
   ];
 }
 
+function Ticker() {
+  const run = (
+    <div className="cs-marquee-track" aria-hidden="true">
+      {TICKER.map((t) => (
+        <span
+          key={t}
+          className="cs-display flex items-center gap-10 px-10 text-xs font-semibold uppercase tracking-[0.35em] md:text-sm"
+        >
+          {t}
+          <span className="h-1 w-1 rounded-full bg-current opacity-40" />
+        </span>
+      ))}
+    </div>
+  );
+  return (
+    <div className="cs-marquee cs-border relative z-10 border-y py-4 text-white/70">
+      <div className="flex">
+        {run}
+        {run}
+      </div>
+    </div>
+  );
+}
+
 function Index() {
   const units = useCountdown();
   const [email, setEmail] = useState("");
@@ -48,6 +83,7 @@ function Index() {
       <div className="cs-blob cs-blob-a" />
       <div className="cs-blob cs-blob-b" />
       <div className="cs-grid pointer-events-none absolute inset-0" />
+      <div className="cs-noise pointer-events-none absolute inset-0" />
 
       <header className="relative z-10 flex items-center justify-between px-6 py-6 md:px-12">
         <img src={logo.url} alt="mobiLap" className="cs-logo h-8 w-auto md:h-10" />
@@ -72,7 +108,7 @@ function Index() {
 
         <div className="cs-fade cs-d2 mt-12 grid grid-cols-4 gap-3 md:gap-5">
           {units.map((u) => (
-            <div key={u.label} className="cs-glass w-20 rounded-2xl py-4 md:w-28 md:py-6">
+            <div key={u.label} className="cs-cell w-20 rounded-2xl py-4 md:w-28 md:py-6">
               <div className="cs-display text-3xl font-bold tabular-nums md:text-5xl">
                 {String(u.value).padStart(2, "0")}
               </div>
@@ -104,6 +140,8 @@ function Index() {
           )}
         </form>
       </section>
+
+      <Ticker />
 
       <footer className="cs-border relative z-10 flex flex-col items-center justify-between gap-2 border-t px-6 py-6 text-xs md:flex-row md:px-12">
         <a href="https://mobilestore.com" className="cs-display tracking-[0.2em]">

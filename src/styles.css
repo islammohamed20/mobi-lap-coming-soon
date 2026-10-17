@@ -133,11 +133,11 @@
 }
 
 :root {
-  --cs-bg: oklch(0.13 0 0);
-  --cs-fg: oklch(0.97 0 0);
-  --cs-dim: oklch(0.6 0 0);
-  --cs-line: oklch(1 0 0 / 12%);
-  --cs-accent: oklch(0.85 0.17 128);
+  --cs-bg: oklch(0 0 0);
+  --cs-fg: oklch(1 0 0);
+  --cs-dim: oklch(0.62 0 0);
+  --cs-line: oklch(1 0 0 / 14%);
+  --cs-accent: oklch(1 0 0);
 }
 
 @layer base {
@@ -146,8 +146,8 @@
   }
 
   body {
-    background-color: var(--color-background);
-    color: var(--color-foreground);
+    background-color: var(--cs-bg);
+    color: var(--cs-fg);
   }
 }
 
@@ -156,41 +156,94 @@
   color: var(--cs-fg);
   font-family: "Manrope", sans-serif;
 }
+
+/* fine white grid, faded toward the edges */
 .cs-grid {
   background-image: linear-gradient(var(--cs-line) 1px, transparent 1px),
     linear-gradient(90deg, var(--cs-line) 1px, transparent 1px);
-  background-size: 72px 72px;
-  mask-image: radial-gradient(ellipse at 50% 40%, black 10%, transparent 65%);
+  background-size: 76px 76px;
+  mask-image: radial-gradient(ellipse at 50% 38%, black 5%, transparent 62%);
 }
+
+/* soft light pools — no hue, pure monochrome */
 .cs-blob {
-  position: absolute; border-radius: 9999px; filter: blur(110px); opacity: 0.55;
-  animation: cs-drift 18s ease-in-out infinite alternate;
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(120px);
+  background: radial-gradient(circle, oklch(1 0 0 / 0.16), transparent 70%);
+  animation: cs-drift 22s ease-in-out infinite alternate;
 }
-.cs-blob-a { background: oklch(0.7 0.19 135); width: 520px; height: 520px; top: -160px; left: -120px; }
-.cs-blob-b { background: oklch(0.55 0.15 200); width: 600px; height: 600px; bottom: -240px; right: -160px; animation-delay: -6s; }
-@keyframes cs-drift { to { transform: translate(80px, 60px) scale(1.15); } }
+.cs-blob-a { width: 640px; height: 640px; top: -260px; left: -140px; }
+.cs-blob-b { width: 720px; height: 720px; bottom: -320px; right: -180px; animation-delay: -8s; }
+@keyframes cs-drift { to { transform: translate(70px, 50px) scale(1.12); } }
+
+/* film grain so the black never looks flat */
+.cs-noise {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+}
+
 .cs-display { font-family: "Syne", sans-serif; }
 .cs-dim { color: var(--cs-dim); }
 .cs-accent { color: var(--cs-accent); }
+
 .cs-gradient-text {
-  background: linear-gradient(180deg, var(--cs-fg) 30%, oklch(0.97 0 0 / 35%));
-  -webkit-background-clip: text; background-clip: text; color: transparent;
+  background: linear-gradient(180deg, oklch(1 0 0) 18%, oklch(1 0 0 / 28%));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
-.cs-dot { background: var(--cs-accent); box-shadow: 0 0 16px var(--cs-accent); }
+
+.cs-dot { background: var(--cs-fg); box-shadow: 0 0 14px oklch(1 0 0 / 0.9); }
 .cs-border { border-color: var(--cs-line); }
+
 .cs-glass {
+  background: oklch(1 0 0 / 5%);
+  border: 1px solid var(--cs-line);
+  backdrop-filter: blur(14px);
+}
+
+/* countdown cell with a hairline split through the middle */
+.cs-cell {
+  position: relative;
+  overflow: hidden;
   background: oklch(1 0 0 / 4%);
   border: 1px solid var(--cs-line);
-  backdrop-filter: blur(16px);
 }
+.cs-cell::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  top: 50%;
+  height: 1px;
+  background: var(--cs-line);
+}
+
 .cs-input { background: transparent; color: var(--cs-fg); outline: none; }
 .cs-input::placeholder { color: var(--cs-dim); }
+
 .cs-btn {
-  background: var(--cs-accent); color: var(--cs-bg);
-  transition: transform .2s, box-shadow .2s;
+  background: var(--cs-fg);
+  color: var(--cs-bg);
+  transition: transform 0.2s, box-shadow 0.2s;
 }
-.cs-btn:hover { transform: translateY(-1px); box-shadow: 0 10px 30px -8px var(--cs-accent); }
+.cs-btn:hover { transform: translateY(-1px); box-shadow: 0 12px 34px -10px oklch(1 0 0 / 0.55); }
+
 .cs-logo { filter: invert(1); mix-blend-mode: screen; }
+
+/* monochrome ticker */
+.cs-marquee {
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, black 12%, black 88%, transparent);
+}
+.cs-marquee-track { display: flex; width: max-content; animation: cs-scroll 34s linear infinite; }
+@keyframes cs-scroll { to { transform: translateX(-50%); } }
+
 .cs-fade { animation: cs-fade 1s ease-out both; }
-.cs-d1 { animation-delay: .15s; } .cs-d2 { animation-delay: .3s; } .cs-d3 { animation-delay: .45s; }
+.cs-d1 { animation-delay: 0.15s; } .cs-d2 { animation-delay: 0.3s; } .cs-d3 { animation-delay: 0.45s; }
 @keyframes cs-fade { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .cs-blob, .cs-marquee-track { animation: none; }
+}
