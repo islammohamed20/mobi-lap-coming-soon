@@ -132,6 +132,14 @@
   --sidebar-ring: oklch(0.551 0.027 264.364);
 }
 
+:root {
+  --cs-bg: oklch(0.13 0 0);
+  --cs-fg: oklch(0.97 0 0);
+  --cs-dim: oklch(0.6 0 0);
+  --cs-line: oklch(1 0 0 / 12%);
+  --cs-accent: oklch(0.85 0.17 128);
+}
+
 @layer base {
   * {
     border-color: var(--color-border);
@@ -142,3 +150,23 @@
     color: var(--color-foreground);
   }
 }
+
+.cs-page {
+  background: radial-gradient(ellipse at 50% 0%, oklch(0.22 0 0), var(--cs-bg) 70%);
+  color: var(--cs-fg);
+  font-family: "Manrope", sans-serif;
+}
+.cs-grid {
+  background-image: linear-gradient(var(--cs-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--cs-line) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse at center, black 20%, transparent 70%);
+}
+.cs-display { font-family: "Syne", sans-serif; }
+.cs-dim { color: var(--cs-dim); }
+.cs-accent { color: var(--cs-accent); }
+.cs-dot { background: var(--cs-accent); box-shadow: 0 0 16px var(--cs-accent); }
+.cs-border { border-color: var(--cs-line); }
+.cs-logo { filter: invert(1); mix-blend-mode: screen; }
+.cs-fade { animation: cs-fade 1.2s ease-out both; }
+@keyframes cs-fade { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
