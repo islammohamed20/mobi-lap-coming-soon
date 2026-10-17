@@ -152,21 +152,45 @@
 }
 
 .cs-page {
-  background: radial-gradient(ellipse at 50% 0%, oklch(0.22 0 0), var(--cs-bg) 70%);
+  background: var(--cs-bg);
   color: var(--cs-fg);
   font-family: "Manrope", sans-serif;
 }
 .cs-grid {
   background-image: linear-gradient(var(--cs-line) 1px, transparent 1px),
     linear-gradient(90deg, var(--cs-line) 1px, transparent 1px);
-  background-size: 64px 64px;
-  mask-image: radial-gradient(ellipse at center, black 20%, transparent 70%);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(ellipse at 50% 40%, black 10%, transparent 65%);
 }
+.cs-blob {
+  position: absolute; border-radius: 9999px; filter: blur(110px); opacity: 0.55;
+  animation: cs-drift 18s ease-in-out infinite alternate;
+}
+.cs-blob-a { background: oklch(0.7 0.19 135); width: 520px; height: 520px; top: -160px; left: -120px; }
+.cs-blob-b { background: oklch(0.55 0.15 200); width: 600px; height: 600px; bottom: -240px; right: -160px; animation-delay: -6s; }
+@keyframes cs-drift { to { transform: translate(80px, 60px) scale(1.15); } }
 .cs-display { font-family: "Syne", sans-serif; }
 .cs-dim { color: var(--cs-dim); }
 .cs-accent { color: var(--cs-accent); }
+.cs-gradient-text {
+  background: linear-gradient(180deg, var(--cs-fg) 30%, oklch(0.97 0 0 / 35%));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
 .cs-dot { background: var(--cs-accent); box-shadow: 0 0 16px var(--cs-accent); }
 .cs-border { border-color: var(--cs-line); }
+.cs-glass {
+  background: oklch(1 0 0 / 4%);
+  border: 1px solid var(--cs-line);
+  backdrop-filter: blur(16px);
+}
+.cs-input { background: transparent; color: var(--cs-fg); outline: none; }
+.cs-input::placeholder { color: var(--cs-dim); }
+.cs-btn {
+  background: var(--cs-accent); color: var(--cs-bg);
+  transition: transform .2s, box-shadow .2s;
+}
+.cs-btn:hover { transform: translateY(-1px); box-shadow: 0 10px 30px -8px var(--cs-accent); }
 .cs-logo { filter: invert(1); mix-blend-mode: screen; }
-.cs-fade { animation: cs-fade 1.2s ease-out both; }
-@keyframes cs-fade { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+.cs-fade { animation: cs-fade 1s ease-out both; }
+.cs-d1 { animation-delay: .15s; } .cs-d2 { animation-delay: .3s; } .cs-d3 { animation-delay: .45s; }
+@keyframes cs-fade { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
