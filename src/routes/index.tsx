@@ -54,7 +54,7 @@ function Ticker() {
           className="cs-display flex items-center gap-10 px-10 text-xs font-semibold uppercase tracking-[0.35em] md:text-sm"
         >
           {t}
-          <span className="cs-line h-1 w-1 rounded-full bg-current opacity-40" />
+          <span className="h-1 w-1 rounded-full bg-current opacity-40" />
         </span>
       ))}
     </div>
